@@ -5,9 +5,9 @@
 //  Created by Big Sad on 2022-03-02.
 //
 
-#ifndef MemberDatabase_hpp
-#define MemberDatabase_hpp
+#ifndef MemberDatabase_h
+#define MemberDatabase_h
 
-#include <stdio.h>
+class MemberDatabase {};
 
 #endif /* MemberDatabase_hpp */

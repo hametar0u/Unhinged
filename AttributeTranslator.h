@@ -1,13 +1,6 @@
-//
-//  AttributeTranslator.hpp
-//  Unhinged
-//
-//  Created by Big Sad on 2022-03-02.
-//
+#ifndef AttributeTranslator_h
+#define AttributeTranslator_h
 
-#ifndef AttributeTranslator_hpp
-#define AttributeTranslator_hpp
-
-#include <stdio.h>
+class AttributeTranslator {};
 
 #endif /* AttributeTranslator_hpp */
