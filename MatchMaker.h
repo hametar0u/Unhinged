@@ -1,13 +1,19 @@
-//
-//  MatchMaker.hpp
-//  Unhinged
-//
-//  Created by Big Sad on 2022-03-02.
-//
+#ifndef MatchMaker_h
+#define MatchMaker_h
 
-#ifndef MatchMaker_hpp
-#define MatchMaker_hpp
+#include <vector>
+#include <string>
+#include "provided.h"
+#include "MemberDatabase.h"
+#include "AttributeTranslator.h"
+using namespace std;
 
-#include <stdio.h>
+class MatchMaker {
+public:
+    MatchMaker(const MemberDatabase& mdb, const AttributeTranslator& at);
+    ~MatchMaker() {}
+    
+    vector<EmailCount> IdentifyRankedMatches(string email, int threshold) const;
+};
 
 #endif /* MatchMaker_hpp */
