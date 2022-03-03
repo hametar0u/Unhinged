@@ -29,6 +29,13 @@ int main() {
     ent = r.search("hobby");
     cerr << ent->attribute << "," << ent->value << endl;
     
+    PersonProfile p("David", "david@david.com");
+    assert(p.GetNumAttValPairs() == 0);
+    p.AddAttValPair(a);
+    assert(p.GetNumAttValPairs() == 1);
+    assert(p.GetAttVal(0, a) == true);
+    cerr << a.attribute << "," << a.value << endl;
+    
 //    MemberDatabase mdb;
 //    if (!mdb.LoadDatabase(MEMBERS_FILE))
 //    {

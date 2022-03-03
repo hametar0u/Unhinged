@@ -29,3 +29,5 @@ private:
 };
 
 #endif /* RadixTree_h */
+
+//problem: in personprofile, I need to map attributes to values, but I can have the same attribute but multiple values

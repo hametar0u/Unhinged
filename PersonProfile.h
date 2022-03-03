@@ -3,13 +3,14 @@
 
 #include <string>
 #include <set>
+#include <vector>
 #include "provided.h"
 #include "RadixTree.h"
 using namespace std;
 
 class PersonProfile {
 public:
-    PersonProfile(string name, string email) : m_name(name), m_email(email) {}
+    PersonProfile(string name, string email) : m_name(name), m_email(email), m_numPairs(0) {}
     ~PersonProfile() {}
     
     string GetName() const { return m_name; }
@@ -22,7 +23,9 @@ public:
 private:
     string m_name;
     string m_email;
-    set<AttValPair> m_attributes;
+    int m_numPairs;
+    RadixTree<AttValPair> t;
+    vector<AttValPair> v;
     //TODO: must use radixtree class to map attributes to values???
 };
 
