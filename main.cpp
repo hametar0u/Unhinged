@@ -38,6 +38,8 @@ int main() {
     
     AttributeTranslator at;
     at.Load("/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt");
+    AttValPair a("hobby", "rock climbing");
+    at.FindCompatibleAttValPairs(a);
     
 //    MemberDatabase mdb;
 //    if (!mdb.LoadDatabase(MEMBERS_FILE))

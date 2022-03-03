@@ -12,7 +12,7 @@ using namespace std;
 template <typename ValueType>
 class RadixTree {
 public:
-    RadixTree() : m_size(0) {} //TODO: ctor
+    RadixTree() : m_size(0) {}
     ~RadixTree() {} //TODO: dtor
     void insert(string key, const ValueType& value) {
         tree[key] = value;
