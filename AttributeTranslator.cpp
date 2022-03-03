@@ -1,8 +1,8 @@
-//
-//  AttributeTranslator.cpp
-//  Unhinged
-//
-//  Created by Big Sad on 2022-03-02.
-//
-
 #include "AttributeTranslator.h"
+
+bool AttributeTranslator::Load(string filename) {
+    return true; //TODO: implement
+}
+vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) const {
+    return {}; //TODO: implement
+}

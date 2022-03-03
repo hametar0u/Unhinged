@@ -8,8 +8,8 @@ using namespace std;
 
 class AttributeTranslator {
 public:
-    AttributeTranslator();
-    ~AttributeTranslator() {}
+    AttributeTranslator() {} //TODO: ctor
+    ~AttributeTranslator() {} //TODO: dtor
     
     bool Load(string filename);
     vector<AttValPair> FindCompatibleAttValPairs(const AttValPair& source) const;

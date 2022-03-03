@@ -10,8 +10,8 @@ using namespace std;
 
 class MatchMaker {
 public:
-    MatchMaker(const MemberDatabase& mdb, const AttributeTranslator& at);
-    ~MatchMaker() {}
+    MatchMaker(const MemberDatabase& mdb, const AttributeTranslator& at) {} //TODO: ctor
+    ~MatchMaker() {} //TODO: dtor
     
     vector<EmailCount> IdentifyRankedMatches(string email, int threshold) const;
 };

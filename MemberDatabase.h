@@ -15,8 +15,8 @@ using namespace std;
 
 class MemberDatabase {
 public:
-    MemberDatabase();
-    ~MemberDatabase() {}
+    MemberDatabase() {} //TODO: ctor
+    ~MemberDatabase() {} //TODO: dtor
     
     bool LoadDatabase(string filename);
     vector<string> FindMatchingMembers(const AttValPair& input) const;

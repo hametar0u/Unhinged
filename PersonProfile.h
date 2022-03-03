@@ -15,7 +15,7 @@ public:
     string GetEmail() const { return m_email; }
     
     void AddAttValPair(const AttValPair& attval);
-    int GetNumAttValPairs() const { return m_attributes.size(); }
+    int GetNumAttValPairs() const;
     bool GetAttVal(int attribute_num, AttValPair& attval) const;
     
 private:
