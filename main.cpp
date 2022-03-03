@@ -5,9 +5,12 @@
 #include "MemberDatabase.h"
 #include "MatchMaker.h"
 #include "provided.h"
+#include "RadixTree.h" //TODO: remove?
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cassert>
+using namespace std;
 
 const std::string MEMBERS_FILE    = "members.txt";
 const std::string TRANSLATOR_FILE = "translator.txt";
@@ -15,23 +18,28 @@ const std::string TRANSLATOR_FILE = "translator.txt";
 bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at);
 
 int main() {
-    MemberDatabase mdb;
-    if (!mdb.LoadDatabase(MEMBERS_FILE))
-    {
-        std::cout << "Error loading " << MEMBERS_FILE << std::endl;
-        return 1;
-    }
-    AttributeTranslator at;
-    if (!at.Load(TRANSLATOR_FILE))
-    {
-        std::cout << "Error loading " << TRANSLATOR_FILE << std::endl;
-        return 1;
-    }
-
-    while (findMatches(mdb, at))
-        ;
-
-    std::cout << "Happy dating!" << std::endl;
+    RadixTree<int> r;
+    r.insert("he", 1);
+    r.insert("he", 2);
+    r.search("he");
+    
+//    MemberDatabase mdb;
+//    if (!mdb.LoadDatabase(MEMBERS_FILE))
+//    {
+//        std::cout << "Error loading " << MEMBERS_FILE << std::endl;
+//        return 1;
+//    }
+//    AttributeTranslator at;
+//    if (!at.Load(TRANSLATOR_FILE))
+//    {
+//        std::cout << "Error loading " << TRANSLATOR_FILE << std::endl;
+//        return 1;
+//    }
+//
+//    while (findMatches(mdb, at))
+//        ;
+//
+//    std::cout << "Happy dating!" << std::endl;
 }
 
 bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)
