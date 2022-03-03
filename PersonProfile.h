@@ -4,6 +4,7 @@
 #include <string>
 #include <set>
 #include "provided.h"
+#include "RadixTree.h"
 using namespace std;
 
 class PersonProfile {
@@ -22,6 +23,7 @@ private:
     string m_name;
     string m_email;
     set<AttValPair> m_attributes;
+    //TODO: must use radixtree class to map attributes to values???
 };
 
 #endif /* PersonProfile_hpp */

@@ -18,10 +18,16 @@ const std::string TRANSLATOR_FILE = "translator.txt";
 bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at);
 
 int main() {
-    RadixTree<int> r;
-    r.insert("he", 1);
-    r.insert("he", 2);
-    r.search("he");
+    RadixTree<AttValPair> r;
+    AttValPair a("hobby", "coding");
+    r.insert("hobby", a);
+    a = AttValPair("hobby", "affairs");
+    r.insert("hobby", a);
+    AttValPair* ent = r.search("hobby");
+    cerr << ent->attribute << "," << ent->value << endl;
+    ent->value = "eating";
+    ent = r.search("hobby");
+    cerr << ent->attribute << "," << ent->value << endl;
     
 //    MemberDatabase mdb;
 //    if (!mdb.LoadDatabase(MEMBERS_FILE))

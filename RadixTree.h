@@ -12,20 +12,20 @@ using namespace std;
 template <typename ValueType>
 class RadixTree {
 public:
-    RadixTree() {} //TODO: ctor
+    RadixTree() : m_size(0) {} //TODO: ctor
     ~RadixTree() {} //TODO: dtor
     void insert(string key, const ValueType& value) {
-        ValueType val = value;
-        tree[key] = val;
+        tree[key] = value;
     }
     
-    ValueType* search(string key) const {
-        if (tree.find(key) == tree.end()) return nullptr;
+    ValueType* search(string key) { //TODO: add const back in later
+        auto entry = tree.find(key);
+        if (entry == tree.end()) return nullptr;
         return &tree.at(key);
     }
 private:
     unordered_map<string, ValueType> tree;
-    vector<ValueType> v;
+    int m_size;
 };
 
 #endif /* RadixTree_h */

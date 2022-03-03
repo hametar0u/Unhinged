@@ -1,16 +1,10 @@
-//
-//  MemberDatabase.hpp
-//  Unhinged
-//
-//  Created by Big Sad on 2022-03-02.
-//
-
 #ifndef MemberDatabase_h
 #define MemberDatabase_h
 
 #include <string>
 #include <vector>
 #include "PersonProfile.h"
+#include "RadixTree.h"
 using namespace std;
 
 class MemberDatabase {
@@ -24,3 +18,4 @@ public:
 };
 
 #endif /* MemberDatabase_hpp */
+
