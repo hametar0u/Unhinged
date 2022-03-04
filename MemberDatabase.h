@@ -15,6 +15,9 @@ public:
     bool LoadDatabase(string filename);
     vector<string> FindMatchingMembers(const AttValPair& input) const;
     const PersonProfile* GetMemberByEmail(string email) const;
+private:
+    RadixTree<PersonProfile*> profilesByEmail;
+    RadixTree<string> emailsByAttrVal;
 };
 
 #endif /* MemberDatabase_hpp */
