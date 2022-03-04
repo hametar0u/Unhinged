@@ -8,7 +8,18 @@
 #include "PersonProfile.h"
 
 void PersonProfile::AddAttValPair(const AttValPair& attval) {
-    t.insert(attval.attribute, attval);//TODO: sussy af
+    //break up attval into attribute -> set of vals
+    
+    unordered_set<string>* attr = t.search(attval.attribute);
+    if (attr != nullptr) { //if attr already in tree,
+        attr->insert(attval.value);
+    }
+    else {
+        unordered_set<string> vals;
+        vals.insert(attval.value);
+        t.insert(attval.attribute, vals);
+    }
+    
     v.push_back(attval);
     m_numPairs++;
 }

@@ -19,9 +19,9 @@ bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at);
 
 int main() {
 //    RadixTree<AttValPair> r;
-//    AttValPair a("hobby", "coding");
+    AttValPair a("hobby", "coding");
 //    r.insert("hobby", a);
-//    a = AttValPair("hobby", "affairs");
+    a = AttValPair("hobby", "affairs");
 //    r.insert("hobby", a);
 //    AttValPair* ent = r.search("hobby");
 //    cerr << ent->attribute << "," << ent->value << endl;
@@ -29,17 +29,17 @@ int main() {
 //    ent = r.search("hobby");
 //    cerr << ent->attribute << "," << ent->value << endl;
 //
-//    PersonProfile p("David", "david@david.com");
-//    assert(p.GetNumAttValPairs() == 0);
-//    p.AddAttValPair(a);
-//    assert(p.GetNumAttValPairs() == 1);
-//    assert(p.GetAttVal(0, a) == true);
-//    cerr << a.attribute << "," << a.value << endl;
+    PersonProfile p("David", "david@david.com");
+    assert(p.GetNumAttValPairs() == 0);
+    p.AddAttValPair(a);
+    assert(p.GetNumAttValPairs() == 1);
+    assert(p.GetAttVal(0, a) == true);
+    cerr << a.attribute << "," << a.value << endl;
     
-    AttributeTranslator at;
-    at.Load("/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt");
-    AttValPair a("hobby", "rock climbing");
-    at.FindCompatibleAttValPairs(a);
+//    AttributeTranslator at;
+//    at.Load("/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt");
+//    AttValPair a("hobby", "rock climbing");
+//    at.FindCompatibleAttValPairs(a);
     
 //    MemberDatabase mdb;
 //    if (!mdb.LoadDatabase(MEMBERS_FILE))

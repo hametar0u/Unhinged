@@ -2,7 +2,7 @@
 #define PersonProfile_h
 
 #include <string>
-#include <set>
+#include <unordered_set>
 #include <vector>
 #include "provided.h"
 #include "RadixTree.h"
@@ -24,7 +24,7 @@ private:
     string m_name;
     string m_email;
     int m_numPairs;
-    RadixTree<AttValPair> t;
+    RadixTree<unordered_set<string>> t;
     vector<AttValPair> v;
     //TODO: must use radixtree class to map attributes to values???
 };

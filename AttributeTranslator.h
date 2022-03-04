@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_set>
 #include "provided.h"
 #include "RadixTree.h"
 using namespace std;
@@ -16,7 +17,7 @@ public:
     vector<AttValPair> FindCompatibleAttValPairs(const AttValPair& source) ; //TODO: add const
 
 private:
-    RadixTree<AttValPair> t;
+    RadixTree<unordered_set<string>> t; //TODO: change back to attvalpair
 };
 
 #endif /* AttributeTranslator_hpp */
