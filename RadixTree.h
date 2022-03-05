@@ -16,7 +16,9 @@ public:
         tree = new unordered_map<string, ValueType>;
     }
     
-    ~RadixTree() {} //TODO: dtor
+    ~RadixTree() {
+        delete tree;
+    } //TODO: dtor
     
     
     void insert(string key, const ValueType& value) {
