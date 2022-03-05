@@ -16,8 +16,9 @@ bool MemberDatabase::LoadDatabase(string filename) {
         int numPairs;
         //getline succeeds if it gets at least one character (doesn't matter if there's no ,)
         if (!getline(file, email)) return false;
-        PersonProfile* member = new PersonProfile(name, email);
-        profilesByEmail.insert(email, member); //<-- the data inside it get corrupted for some reason
+//        const PersonProfile* member = new PersonProfile(name, email);
+        PersonProfile member(name, email);
+        profilesByEmail.insert(email, member); //<-- the data inside it get corrupted because PersonProfile was created locally
         
         if (!getline(file, num)) return false;
         numPairs = stoi(num);
@@ -31,7 +32,8 @@ bool MemberDatabase::LoadDatabase(string filename) {
             
             AttValPair attval(attr, val);
             
-            member->AddAttValPair(attval);
+//            member->AddAttValPair(attval);
+            member.AddAttValPair(attval);
             
             unordered_set<string>* emailsWithAttval = emailsByAttrVal.search(pair);
             if (emailsWithAttval == nullptr) {
@@ -56,6 +58,7 @@ vector<string> MemberDatabase::FindMatchingMembers(const AttValPair& input) cons
     return {}; //TODO: implement
 }
 const PersonProfile* MemberDatabase::GetMemberByEmail(string email) /*TODO: const*/ {
-    PersonProfile** target = profilesByEmail.search(email);
-    return !target ? nullptr : *target;
+    PersonProfile* target = profilesByEmail.search(email);
+    return target;
+//    return !target ? nullptr : target;
 }

@@ -17,7 +17,7 @@ public:
     vector<string> FindMatchingMembers(const AttValPair& input) const;
     const PersonProfile* GetMemberByEmail(string email) ;
 private:
-    RadixTree<PersonProfile*> profilesByEmail;
+    RadixTree<PersonProfile> profilesByEmail;
     RadixTree<unordered_set<string>> emailsByAttrVal;
 };
 
