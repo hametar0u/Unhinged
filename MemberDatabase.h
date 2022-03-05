@@ -14,10 +14,10 @@ public:
     
     bool LoadDatabase(string filename);
     vector<string> FindMatchingMembers(const AttValPair& input) const;
-    const PersonProfile* GetMemberByEmail(string email) const;
+    const PersonProfile* GetMemberByEmail(string email) ;
 private:
     RadixTree<PersonProfile*> profilesByEmail;
-    RadixTree<string> emailsByAttrVal;
+    RadixTree<vector<string>> emailsByAttrVal;
 };
 
 #endif /* MemberDatabase_hpp */

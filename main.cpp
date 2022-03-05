@@ -12,10 +12,10 @@
 #include <cassert>
 using namespace std;
 
-const std::string MEMBERS_FILE    = "members.txt";
-const std::string TRANSLATOR_FILE = "translator.txt";
+const std::string MEMBERS_FILE    = "/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/members.txt";
+const std::string TRANSLATOR_FILE = "/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt";
 
-bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at);
+bool findMatches(/*const*/ MemberDatabase& mdb, const AttributeTranslator& at);
 
 int main() {
 //    RadixTree<AttValPair> r;
@@ -36,31 +36,31 @@ int main() {
 //    assert(p.GetAttVal(0, a) == true);
 //    cerr << a.attribute << "," << a.value << endl;
     
-    AttributeTranslator at;
-    at.Load("/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt");
-    AttValPair a("hobby", "rock climbing");
-    at.FindCompatibleAttValPairs(a);
-    
-//    MemberDatabase mdb;
-//    if (!mdb.LoadDatabase(MEMBERS_FILE))
-//    {
-//        std::cout << "Error loading " << MEMBERS_FILE << std::endl;
-//        return 1;
-//    }
 //    AttributeTranslator at;
-//    if (!at.Load(TRANSLATOR_FILE))
-//    {
-//        std::cout << "Error loading " << TRANSLATOR_FILE << std::endl;
-//        return 1;
-//    }
-//
-//    while (findMatches(mdb, at))
-//        ;
-//
-//    std::cout << "Happy dating!" << std::endl;
+//    at.Load("/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt");
+//    AttValPair a("hobby", "rock climbing");
+//    at.FindCompatibleAttValPairs(a);
+    
+    MemberDatabase mdb;
+    if (!mdb.LoadDatabase(MEMBERS_FILE))
+    {
+        std::cout << "Error loading " << MEMBERS_FILE << std::endl;
+        return 1;
+    }
+    AttributeTranslator at;
+    if (!at.Load(TRANSLATOR_FILE))
+    {
+        std::cout << "Error loading " << TRANSLATOR_FILE << std::endl;
+        return 1;
+    }
+
+    while (findMatches(mdb, at))
+        ;
+
+    std::cout << "Happy dating!" << std::endl;
 }
 
-bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)
+bool findMatches(/*const*/ MemberDatabase& mdb, const AttributeTranslator& at)
 {
       // Prompt for email
     std::string email;
