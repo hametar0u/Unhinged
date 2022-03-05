@@ -1,0 +1,26 @@
+Abdullah Fowler
+AbFow2483@charter.net
+4
+job,architect
+hobby,canyoneering
+trait,disloyal
+trait,aloof
+
+Mordechai Hayes
+MHa7@sky.com
+3
+job,accountant
+hobby,canyoneering
+trait,uncritical
+
+Titan Adkins
+TiAdkins81471@charter.net
+8
+job,architect
+hobby,canyoneering
+hobby,martial arts
+hobby,sailing
+hobby,cosplaying
+trait,uncritical
+trait,silly
+trait,uncritical

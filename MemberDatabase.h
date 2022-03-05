@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_set>
 #include "PersonProfile.h"
 #include "RadixTree.h"
 using namespace std;
@@ -17,7 +18,7 @@ public:
     const PersonProfile* GetMemberByEmail(string email) ;
 private:
     RadixTree<PersonProfile*> profilesByEmail;
-    RadixTree<vector<string>> emailsByAttrVal;
+    RadixTree<unordered_set<string>> emailsByAttrVal;
 };
 
 #endif /* MemberDatabase_hpp */

@@ -16,8 +16,8 @@ bool MemberDatabase::LoadDatabase(string filename) {
         int numPairs;
         //getline succeeds if it gets at least one character (doesn't matter if there's no ,)
         if (!getline(file, email)) return false;
-        PersonProfile member(name, email);
-        profilesByEmail.insert(email, &member);
+        PersonProfile* member = new PersonProfile(name, email);
+        profilesByEmail.insert(email, member); //<-- the data inside it get corrupted for some reason
         
         if (!getline(file, num)) return false;
         numPairs = stoi(num);
@@ -31,16 +31,16 @@ bool MemberDatabase::LoadDatabase(string filename) {
             
             AttValPair attval(attr, val);
             
-            member.AddAttValPair(attval);
+            member->AddAttValPair(attval);
             
-            vector<string>* emailsWithAttval = emailsByAttrVal.search(pair);
+            unordered_set<string>* emailsWithAttval = emailsByAttrVal.search(pair);
             if (emailsWithAttval == nullptr) {
-                vector<string> newEmailBucket;
-                newEmailBucket.push_back(email);
+                unordered_set<string> newEmailBucket;
+                newEmailBucket.insert(email);
                 emailsByAttrVal.insert(pair, newEmailBucket);
             }
             else {
-                emailsWithAttval->push_back(email);
+                emailsWithAttval->insert(email);
             }
         }
         

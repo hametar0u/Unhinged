@@ -12,7 +12,7 @@
 #include <cassert>
 using namespace std;
 
-const std::string MEMBERS_FILE    = "/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/members.txt";
+const std::string MEMBERS_FILE    = "/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/membersTest.txt";
 const std::string TRANSLATOR_FILE = "/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt";
 
 bool findMatches(/*const*/ MemberDatabase& mdb, const AttributeTranslator& at);

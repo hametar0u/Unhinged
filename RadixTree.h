@@ -13,9 +13,14 @@ template <typename ValueType>
 class RadixTree {
 public:
     RadixTree() : m_size(0) {}
-    ~RadixTree() {} //TODO: dtor
+    ~RadixTree() {
+//        for (auto node : tree) {
+//            delete node;
+//        }
+    } //TODO: dtor
     void insert(string key, const ValueType& value) {
         tree[key] = value;
+        m_size = tree.size(); //TODO: for testing only
     }
     
     ValueType* search(string key) { //TODO: add const back in later
@@ -29,5 +34,3 @@ private:
 };
 
 #endif /* RadixTree_h */
-
-//problem: in personprofile, I need to map attributes to values, but I can have the same attribute but multiple values
