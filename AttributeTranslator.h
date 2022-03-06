@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include "provided.h"
 #include "RadixTree.h"
+#include "utility.h"
 using namespace std;
 
 class AttributeTranslator {
@@ -17,7 +18,18 @@ public:
     vector<AttValPair> FindCompatibleAttValPairs(const AttValPair& source) ; //TODO: add const
 
 private:
-    RadixTree<unordered_set<string>> t; //TODO: change back to attvalpair
+    struct pair {
+        pair() {}
+        pair(AttValPair attval) {
+            s.insert(attVal2Str(attval.attribute, attval.value));
+            v.push_back(attval);
+        }
+        
+        unordered_set<string> s;
+        vector<AttValPair> v;
+    };
+    
+    RadixTree<pair> t; //TODO: change back to attvalpair
 };
 
 #endif /* AttributeTranslator_hpp */

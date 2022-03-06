@@ -14,13 +14,11 @@ public:
     ~MemberDatabase() {} //TODO: dtor
     
     bool LoadDatabase(string filename);
-    vector<string> FindMatchingMembers(const AttValPair& input) const;
+    vector<string> FindMatchingMembers(/*const*/ AttValPair& input) /*const*/;
     const PersonProfile* GetMemberByEmail(string email) ;
 private:
-    RadixTree<PersonProfile*> profilesByEmail;
-    RadixTree<unordered_set<string>> emailsByAttrVal;
-    
     struct emailPair {
+        emailPair() {}
         emailPair(string email) {
             s.insert(email);
             v.push_back(email);
@@ -28,6 +26,9 @@ private:
         unordered_set<string> s;
         vector<string> v;
     };
+    
+    RadixTree<PersonProfile*> profilesByEmail;
+    RadixTree<emailPair> emailsByAttrVal;
 };
 
 #endif /* MemberDatabase_hpp */

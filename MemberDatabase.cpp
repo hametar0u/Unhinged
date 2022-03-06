@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include "utility.h"
+using namespace std;
 
 bool MemberDatabase::LoadDatabase(string filename) {
     ifstream file(filename);
@@ -34,14 +36,15 @@ bool MemberDatabase::LoadDatabase(string filename) {
             member->AddAttValPair(attval);
 //            member.AddAttValPair(attval);
             
-            unordered_set<string>* emailsWithAttval = emailsByAttrVal.search(pair);
+            emailPair* emailsWithAttval = emailsByAttrVal.search(pair);
             if (emailsWithAttval == nullptr) {
-                unordered_set<string> newEmailBucket;
-                newEmailBucket.insert(email);
-                emailsByAttrVal.insert(pair, newEmailBucket);
+                emailPair e(email);
+                emailsByAttrVal.insert(pair, e);
             }
             else {
-                emailsWithAttval->insert(email);
+                if (emailsWithAttval->s.insert(pair).second) {
+                    emailsWithAttval->v.push_back(pair);
+                }
             }
         }
         
@@ -56,8 +59,12 @@ bool MemberDatabase::LoadDatabase(string filename) {
     
     return true;
 }
-vector<string> MemberDatabase::FindMatchingMembers(const AttValPair& input) const {
-    return {}; //TODO: implement
+vector<string> MemberDatabase::FindMatchingMembers(/*const*/ AttValPair& input) /*const*/ {
+    string pair = attVal2Str(input.attribute, input.value);
+    emailPair* matchingVec = emailsByAttrVal.search(pair);
+    if (!matchingVec) return {};
+    return matchingVec->v;
+    
 }
 const PersonProfile* MemberDatabase::GetMemberByEmail(string email) /*TODO: const*/ {
     PersonProfile** target = profilesByEmail.search(email);

@@ -36,29 +36,30 @@ int main() {
 //    assert(p.GetAttVal(0, a) == true);
 //    cerr << a.attribute << "," << a.value << endl;
     
-//    AttributeTranslator at;
-//    at.Load("/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt");
-//    AttValPair a("hobby", "rock climbing");
-//    at.FindCompatibleAttValPairs(a);
-    
-    
-    MemberDatabase mdb;
-    if (!mdb.LoadDatabase(MEMBERS_FILE))
-    {
-        std::cout << "Error loading " << MEMBERS_FILE << std::endl;
-        return 1;
-    }
     AttributeTranslator at;
-    if (!at.Load(TRANSLATOR_FILE))
-    {
-        std::cout << "Error loading " << TRANSLATOR_FILE << std::endl;
-        return 1;
-    }
-
-    while (findMatches(mdb, at))
-        ;
-
-    std::cout << "Happy dating!" << std::endl;
+    at.Load("/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt");
+    AttValPair a("hobby", "rock climbing");
+    vector<AttValPair> v = at.FindCompatibleAttValPairs(a);
+    cout << v.size() << " compatible pairs" << endl;
+    
+    
+//    MemberDatabase mdb;
+//    if (!mdb.LoadDatabase(MEMBERS_FILE))
+//    {
+//        std::cout << "Error loading " << MEMBERS_FILE << std::endl;
+//        return 1;
+//    }
+//    AttributeTranslator at;
+//    if (!at.Load(TRANSLATOR_FILE))
+//    {
+//        std::cout << "Error loading " << TRANSLATOR_FILE << std::endl;
+//        return 1;
+//    }
+//
+//    while (findMatches(mdb, at))
+//        ;
+//
+//    std::cout << "Happy dating!" << std::endl;
 }
 
 bool findMatches(/*const*/ MemberDatabase& mdb, const AttributeTranslator& at)
@@ -84,6 +85,10 @@ bool findMatches(/*const*/ MemberDatabase& mdb, const AttributeTranslator& at)
         pp->GetAttVal(k, av);
         std::cout << av.attribute << " --> " << av.value << std::endl;
     }
+    
+    AttValPair test("trait","uncritical");
+    vector<string> vec = mdb.FindMatchingMembers(test);
+    cout << "uncritical buffoons: " << vec.size() << endl;
 
       // Prompt user for threshold
     int threshold;
