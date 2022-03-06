@@ -10,8 +10,8 @@ using namespace std;
 
 class MemberDatabase {
 public:
-    MemberDatabase() {} //TODO: ctor
-    ~MemberDatabase() {} //TODO: dtor
+    MemberDatabase() {}
+    ~MemberDatabase() {} //TODO: dtor; traverse through tree and delete the dynamically allocated person profiles
     
     bool LoadDatabase(string filename);
     vector<string> FindMatchingMembers(/*const*/ AttValPair& input) /*const*/;
