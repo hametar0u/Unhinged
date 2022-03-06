@@ -24,7 +24,8 @@ private:
     string m_name;
     string m_email;
     int m_numPairs;
-    RadixTree<unordered_set<string>> t;
+    RadixTree<string> t;
+    unordered_set<string> s;
     vector<AttValPair> v;
     //TODO: must use radixtree class to map attributes to values???
 };

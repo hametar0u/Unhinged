@@ -12,30 +12,31 @@ using namespace std;
 template <typename ValueType>
 class RadixTree {
 public:
-    RadixTree() : m_size(0) {
-        tree = new unordered_map<string, ValueType>;
-    }
+    RadixTree() : m_size(0) {}
     
-    ~RadixTree() {
-        delete tree;
-    } //TODO: dtor
+    ~RadixTree() {} //TODO: dtor
     
     
     void insert(string key, const ValueType& value) {
-        if (search(key) != nullptr)
-            tree->at(key) = value;
-        else
-            tree->insert(make_pair(key, value));
-        m_size = tree->size(); //TODO: for testing only
+//        ValueType copy = value; //
+//
+//        if (search(key) != nullptr)
+//            tree.at(key) = value;
+//        else
+//            tree.insert(make_pair(key, value));
+//        m_size = tree.size(); //TODO: for testing only
+        
+        tree[key] = value;
+        m_size = tree.size();
     }
     
-    ValueType* search(string key) const { //TODO: add const back in later
-        auto entry = tree->find(key);
-        if (entry == tree->end()) return nullptr;
-        return &tree->at(key);
+    ValueType* search(string key) { //TODO: add const back in later
+        auto entry = tree.find(key);
+        if (entry == tree.end()) return nullptr;
+        return &tree.at(key);
     }
 private:
-    unordered_map<string, ValueType>* tree;
+    unordered_map<string, ValueType> tree;
     int m_size;
 };
 

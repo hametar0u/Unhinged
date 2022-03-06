@@ -17,8 +17,17 @@ public:
     vector<string> FindMatchingMembers(const AttValPair& input) const;
     const PersonProfile* GetMemberByEmail(string email) ;
 private:
-    RadixTree<PersonProfile> profilesByEmail;
+    RadixTree<PersonProfile*> profilesByEmail;
     RadixTree<unordered_set<string>> emailsByAttrVal;
+    
+    struct emailPair {
+        emailPair(string email) {
+            s.insert(email);
+            v.push_back(email);
+        }
+        unordered_set<string> s;
+        vector<string> v;
+    };
 };
 
 #endif /* MemberDatabase_hpp */
