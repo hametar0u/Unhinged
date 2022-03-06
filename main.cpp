@@ -62,7 +62,7 @@ int main() {
 //    std::cout << "Happy dating!" << std::endl;
 }
 
-bool findMatches(/*const*/ MemberDatabase& mdb, const AttributeTranslator& at)
+bool findMatches(/*const*/ MemberDatabase& mdb, /*const*/ AttributeTranslator& at)
 {
       // Prompt for email
     std::string email;

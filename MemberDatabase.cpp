@@ -66,7 +66,7 @@ vector<string> MemberDatabase::FindMatchingMembers(/*const*/ AttValPair& input) 
     return matchingVec->v;
     
 }
-const PersonProfile* MemberDatabase::GetMemberByEmail(string email) /*TODO: const*/ {
+/*const*/ PersonProfile* MemberDatabase::GetMemberByEmail(string email) /*const*/ {
     PersonProfile** target = profilesByEmail.search(email);
 //    return target;
     return !target ? nullptr : *target;
