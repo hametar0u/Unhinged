@@ -20,7 +20,7 @@ vector<EmailCount> MatchMaker::IdentifyRankedMatches(string email, int threshold
 //        }
         
     }
-    for (auto attr : compatibleAttr) {
+    for (auto attr : compatibleAttr) { //at some point there was a "job,architect" as a matchingMember
         vector<string> matchingMembers = m_mdb.FindMatchingMembers(attr);
         for (auto matchingMember : matchingMembers) {
             if (emailCounts.find(matchingMember) == emailCounts.end()) {

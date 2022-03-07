@@ -42,14 +42,14 @@ bool MemberDatabase::LoadDatabase(string filename) {
                 emailsByAttrVal.insert(pair, e);
             }
             else {
-                if (emailsWithAttval->s.insert(pair).second) {
-                    emailsWithAttval->v.push_back(pair);
+                if (emailsWithAttval->s.insert(email).second) {
+                    emailsWithAttval->v.push_back(email);
                 }
             }
         }
         
         
-        profilesByEmail.insert(email, member); // <-- the data inside it get corrupted because PersonProfile was created locally
+        profilesByEmail.insert(email, member);
         
         string junk;
         getline(file, junk); //to skip the br between each entry
