@@ -9,8 +9,10 @@
 #define utility_hpp
 
 #include <string>
+#include "provided.h"
 using namespace std;
 
 string attVal2Str(string attr, string val);
+AttValPair str2AttVal(string attval);
 
 #endif /* utility_hpp */
