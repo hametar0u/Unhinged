@@ -46,6 +46,7 @@ public:
                 Node* n = new Node;
                 n->label = key;
                 n->val = value;
+                n->end = true;
                 target->children[index] = n;
                 return;
                 break; //extraneous but failsafe
@@ -55,11 +56,12 @@ public:
                  use label in target to figure out the remaining key
                  insert in right spot
                  */
-                string remainingKey = key.substr(target->label.size() + 1);
+                string remainingKey = key.substr(target->label.size());
                 int index = remainingKey[0];
                 Node* n = new Node;
-                n->label = key;
+                n->label = remainingKey;
                 n->val = value;
+                n->end = true;
                 target->children[index] = n;
                 return;
                 break;
@@ -74,10 +76,11 @@ public:
                  change parent name to label
                  make sure to keep the actual boolean true
                  */
-                string remainingLabel = target->label.substr(key.size() + 1);
+                string remainingLabel = target->label.substr(key.size());
                 int index = remainingLabel[0];
                 
                 Node* n = new Node(*target); //cpy ctor
+                n->label = remainingLabel;
                 killChildren(target);
                 target->children[index] = n;
                 
@@ -116,10 +119,12 @@ public:
                 Node* n2 = new Node;
                 n2->label = remainingKey;
                 n2->val = value;
+                n2->end = true;
                 
                 target->children[index1] = n1;
                 target->children[index2] = n2;
                 target->label = common;
+                target->end = false;
                 
                 return;
                 break;
@@ -148,6 +153,7 @@ private:
             for (int i = 0; i < CHILDREN_SIZE; i++) {
                 children[i] = src.children[i];
             }
+            val = src.val;
             end = src.end;
         }
         
@@ -188,9 +194,9 @@ private:
         string partOfKey = key.substr(0, cur->label.size());
         if (partOfKey != cur->label) return nullptr;
         
-        if (key.size() == cur->label.size()) return &cur->val; //perfect match, so return the value
+        if (key.size() == cur->label.size() && cur->end) return &cur->val; //perfect match, so return the value
         
-        string remainingKey = key.substr(cur->label.size() + 1);
+        string remainingKey = key.substr(cur->label.size());
         
         return searchHelper(remainingKey, cur);
     }
