@@ -16,16 +16,10 @@ public:
     vector<EmailCount> IdentifyRankedMatches(string email, int threshold) /*const*/;
     
 private:
-    bool emailSortOrder(const EmailCount& a, const EmailCount& b) {
-        if (a.count == b.count)
-            return a.email < b.email;
-        return a.count > b.count;
-    }
-    
     void appendVector(vector<AttValPair>& a, const vector<AttValPair>& b) {
         for (auto i : b) {
             a.push_back(i);
-        }
+        } //TODO: remove if not needed
     }
     
     /*const*/ MemberDatabase m_mdb;

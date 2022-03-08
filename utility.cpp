@@ -17,3 +17,7 @@ AttValPair str2AttVal(string attval) {
     a.value = attval.substr(attval.find(',')+1);
     return a;
 }
+
+//bool operator< (const AttValPair& a, const AttValPair& b) {
+//    
+//}

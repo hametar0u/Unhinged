@@ -2,12 +2,22 @@
 #include "utility.h"
 #include <algorithm>
 #include <iostream>
+#include <set>
 using namespace std;
+
+//helper function (comparison operator for emailcount)
+bool operator< (const EmailCount& a, const EmailCount& b) {
+    if (a.count == b.count)
+        return a.email < b.email;
+    return a.count > b.count;
+}
+
 
 vector<EmailCount> MatchMaker::IdentifyRankedMatches(string email, int threshold) /*const*/ {
     
-    unordered_set<string> compatibleAttrSet;
-    unordered_map<string, int> emailCounts;
+    unordered_set<string> compatibleAttrSet; //remove duplicate attvals
+    unordered_map<string, int> emailCounts; //makes it easy to increment counts
+//    set<EmailCount> emailCounts;
     vector<EmailCount> matches;
 //    vector<AttValPair> compatibleAttr;
     
@@ -17,7 +27,6 @@ vector<EmailCount> MatchMaker::IdentifyRankedMatches(string email, int threshold
     for (int i = 0; i < member->GetNumAttValPairs(); i++) {
         AttValPair member_attr;
         member->GetAttVal(i, member_attr);
-//        appendVector(compatibleAttr, m_at.FindCompatibleAttValPairs(member_attr));
         
         vector<AttValPair> compatibleAttr = m_at.FindCompatibleAttValPairs(member_attr);
         for (auto attr : compatibleAttr) {
@@ -48,7 +57,7 @@ vector<EmailCount> MatchMaker::IdentifyRankedMatches(string email, int threshold
     }
     
     //since I have O(n^2) somewhere doesn't matter if I nlogn sort
-//    sort(matches.begin(), matches.end(), emailSortOrder);
+    sort(matches.begin(), matches.end());
     
     return matches;
 }
