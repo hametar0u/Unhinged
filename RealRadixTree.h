@@ -5,9 +5,11 @@
 #include <string>
 using namespace std;
 
-const int CHILDREN_SIZE = 128; //TODO: change this number
+//constants
+const int CHILDREN_SIZE = 128; //# ASCII characters
 enum caseNum {TRAILING_KEY, TRAILING_LABEL, MID_SPLIT, NO_COMMON_SUBSTR};
 
+//radixtree class
 template <typename ValueType>
 class RadixTree {
 public:
@@ -25,11 +27,10 @@ public:
          first get the position to insert
          then deal with the insert cases
          
-         1. ca -> cat
-            get the remaining substr
-            children[index] 
-         2. cat -> ca
-         3. cat -> cyan
+         NO_COMMON_SUBSTR: cat -> winter
+         TRAILING_KEY: ca -> cat
+         TRAILING_LABEL: cat -> ca
+         MID_SPLIT: cat -> cyan
          */
         
         caseNum caseType;
@@ -37,30 +38,56 @@ public:
         if (!target) return;
         
         switch(caseType) {
-            case NO_COMMON_SUBSTR:
+            case NO_COMMON_SUBSTR: {
                 /*
                  find ascii character of key[0] and insert the node
                  */
-                break;
-            case TRAILING_KEY:
+                int index = key[0];
+                Node* n = new Node;
+                n->label = key;
+                n->val = value;
+                target->children[index] = n;
+                return;
+                break; //extraneous but failsafe
+            }
+            case TRAILING_KEY: {
                 /*
                  use label in target to figure out the remaining key
                  insert in right spot
                  */
+                string remainingKey = key.substr(target->label.size() + 1);
+                int index = remainingKey[0];
+                Node* n = new Node;
+                n->label = key;
+                n->val = value;
+                target->children[index] = n;
+                return;
                 break;
-            case TRAILING_LABEL:
+            }
+            case TRAILING_LABEL: {
                 /*
-                 find all of common letters
-                 take leftover words
-                 inherit everything in parent
-                 wipe
+                 take leftover words in label
+                 create new node that inherits everything in parent
+                 wipe parent's children (we don't wipe parent value because ValueType is templated)
                  parent point to new node
                  set parent value to passed in value
                  change parent name to label
                  make sure to keep the actual boolean true
                  */
+                string remainingLabel = target->label.substr(key.size() + 1);
+                int index = remainingLabel[0];
+                
+                Node* n = new Node(*target); //cpy ctor
+                killChildren(target);
+                target->children[index] = n;
+                
+                target->val = value;
+                target->label = key;
+                
+                return;
                 break;
-            case MID_SPLIT:
+            }
+            case MID_SPLIT: {
                 /*
                  find all of common letters
                  take leftover words
@@ -69,9 +96,34 @@ public:
                  parent point to new node
                  insert new node with whatever is left in the key
                  parent point to new node
-                 change parent name to label
+                 change parent label to common words
                  */
+                string common;
+                int i = 0;
+                while (target->label[i] == key[i]) {
+                    common += key[i];
+                    i++;
+                }
+                string remainingLabel = target->label.substr(i);
+                string remainingKey = key.substr(i);
+                int index1 = remainingLabel[0];
+                int index2 = remainingKey[0];
+                
+                Node* n1 = new Node(*target);
+                n1->label = remainingLabel; //the cpy ctor inherits the original label so I need to overwrite it
+                killChildren(target);
+                
+                Node* n2 = new Node;
+                n2->label = remainingKey;
+                n2->val = value;
+                
+                target->children[index1] = n1;
+                target->children[index2] = n2;
+                target->label = common;
+                
+                return;
                 break;
+            }
         }
         
     }
@@ -91,6 +143,14 @@ private:
             end = false;
         }
         
+        Node(const Node& src) {
+            label = src.label;
+            for (int i = 0; i < CHILDREN_SIZE; i++) {
+                children[i] = src.children[i];
+            }
+            end = src.end;
+        }
+        
 
         string label;
         ValueType val;
@@ -99,7 +159,7 @@ private:
     };
     
     //helper functions
-    const ValueType* searchHelper(string key, Node* root) const {
+    ValueType* searchHelper(string key, Node* root) const {
         
         /*
          start at root
@@ -175,6 +235,11 @@ private:
         return findFirstNonMatching(cur, caseType, remainingKey);
     }
     
+    void killChildren(Node* target) {
+        for (int i = 0; i < CHILDREN_SIZE; i++) {
+            target->children[i] = nullptr;
+        }
+    }
     
     void killTree(Node* root) {
         for (int i = 0; i < CHILDREN_SIZE; i++) {
