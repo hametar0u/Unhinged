@@ -15,6 +15,4 @@ using namespace std;
 string attVal2Str(string attr, string val);
 AttValPair str2AttVal(string attval);
 
-//bool operator< (const AttValPair& a, const AttValPair& b); //TODO: remove if not used
-
 #endif /* utility_hpp */

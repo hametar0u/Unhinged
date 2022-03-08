@@ -18,6 +18,3 @@ AttValPair str2AttVal(string attval) {
     return a;
 }
 
-//bool operator< (const AttValPair& a, const AttValPair& b) {
-//    
-//}
