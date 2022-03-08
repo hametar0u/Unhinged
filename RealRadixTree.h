@@ -103,9 +103,15 @@ public:
                  */
                 string common;
                 int i = 0;
+                int j = 0;
+                while (target->label[i] != key[j]) {
+                    j++;
+                }
+                key = key.substr(j); //splice off the beginning that may be used in parent nodes
+                
                 while (target->label[i] == key[i]) {
                     common += key[i];
-                    i++;
+                    i++;;
                 }
                 string remainingLabel = target->label.substr(i);
                 string remainingKey = key.substr(i);
@@ -213,7 +219,7 @@ private:
         cur = cur->children[index]; //follow into child
         
         
-        if (key.size() == cur->label.size()) return nullptr; //perfect match, so return nothing
+        if (key == cur->label) return nullptr; //perfect match, so return nothing
         if (cur->label.size() > key.size()) {
             string partOfLabel = cur->label.substr(0, key.size());
             if (partOfLabel != key) {
@@ -234,9 +240,12 @@ private:
         }
             
 
-        string remainingKey = key.substr(cur->label.size() + 1); //TODO: not needed??
-        caseType = TRAILING_KEY; //there's only stuff left in the key
-        return cur;
+        string remainingKey = key.substr(cur->label.size());
+        index = remainingKey[0];
+        if (!cur->children[index]) {
+            caseType = TRAILING_KEY; //there's only stuff left in the key
+            return cur;
+        }
         
         return findFirstNonMatching(cur, caseType, remainingKey);
     }
