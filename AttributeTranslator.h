@@ -11,11 +11,11 @@ using namespace std;
 
 class AttributeTranslator {
 public:
-    AttributeTranslator() {} //TODO: ctor
-    ~AttributeTranslator() {} //TODO: dtor
+    AttributeTranslator() {}
+    ~AttributeTranslator() {}
     
     bool Load(string filename);
-    vector<AttValPair> FindCompatibleAttValPairs(const AttValPair& source) ; //TODO: add const
+    vector<AttValPair> FindCompatibleAttValPairs(const AttValPair& source) const;
 
 private:
     struct pair {
@@ -29,7 +29,7 @@ private:
         vector<AttValPair> v;
     };
     
-    RadixTree<pair> t; //TODO: change back to attvalpair
+    RadixTree<pair> t;
 };
 
 #endif /* AttributeTranslator_hpp */

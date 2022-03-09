@@ -52,23 +52,14 @@ public:
                 break; //extraneous but failsafe
             }
             case TRAILING_KEY: {
-                /*
-                 use label in target to figure out the remaining key
-                 insert in right spot
-                 */
-                
-                //if hoppy,photography is the key and your target node is p, then how do i get hotography
-//                string remainingKey = keyToUse.substr(target->label.size());
-//                int index = remainingKey[0];
-                int index = keyToUse[0];
-//                Node* n = new Node(remainingKey, value);
+                int index = keyToUse[0]; //keyToUse saves the remaining bit of the key
                 Node* n = new Node(keyToUse, value);
                 target->children[index] = n;
                 return;
                 break;
             }
             case TRAILING_LABEL: {
-                if (keyToUse.size() != 0) key = keyToUse;
+                if (keyToUse.size() != 0) key = keyToUse; //keyToUse stores the spliced key, and since its a trailing label you need to add the reamining bit of the label
                 string remainingLabel = target->label.substr(key.size()); //take leftover chars in label
                 int index = remainingLabel[0];
                 
@@ -122,7 +113,6 @@ public:
 private:
     struct Node {
         Node() {
-            label = "";
             for (int i = 0; i < CHILDREN_SIZE; i++) {
                 children[i] = nullptr;
             }
@@ -155,24 +145,6 @@ private:
     
     //helper functions
     ValueType* searchHelper(string key, Node* root) const {
-        
-        /*
-         start at root
-         get key[0] and go to children[ASCII value]
-         if (!c) your search failed so you return nullptr
-         else, follow c into child
-         
-         compare label.substr(1) to same amount of letters in remaining key
-         if matched, check if anything left in key
-         if no, return &value
-         else, take first letter of next part and go to children[ASCII value]
-         
-         loop
-         
-         base case:
-         if !curPtr return nullptr
-         */
-        
         if (!root) return nullptr; //base case:
         Node* cur = root;
         

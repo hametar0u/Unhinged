@@ -5,7 +5,7 @@
 #include "MemberDatabase.h"
 #include "MatchMaker.h"
 #include "provided.h"
-#include "RadixTree.h" //TODO: remove?
+#include "RadixTree.h"
 #include <iostream>
 #include <string>
 #include <vector>

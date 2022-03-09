@@ -23,7 +23,7 @@ bool AttributeTranslator::Load(string filename) {
         
         AttValPair target(target_attr, target_val);
         string src = attVal2Str(source_attr, source_val);
-        string targetStr = attVal2Str(target_attr, target_val); //TODO: use target instead in prod or not lol
+        string targetStr = attVal2Str(target_attr, target_val);
         
         pair* targets = t.search(src);
         if (!targets) {
@@ -40,7 +40,7 @@ bool AttributeTranslator::Load(string filename) {
     return true;
 }
 
-vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) { //TODO: add const
+vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) const {
     string src = attVal2Str(source.attribute, source.value);
     
     

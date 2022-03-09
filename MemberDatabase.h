@@ -18,8 +18,8 @@ public:
     }
     
     bool LoadDatabase(string filename);
-    vector<string> FindMatchingMembers(/*const*/ AttValPair& input) /*const*/;
-    /*const*/ PersonProfile* GetMemberByEmail(string email) /*const*/;
+    vector<string> FindMatchingMembers(const AttValPair& input) const;
+    const PersonProfile* GetMemberByEmail(string email) const;
     
 private:
     struct emailPair {

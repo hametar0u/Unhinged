@@ -59,14 +59,14 @@ bool MemberDatabase::LoadDatabase(string filename) {
     
     return true;
 }
-vector<string> MemberDatabase::FindMatchingMembers(/*const*/ AttValPair& input) /*const*/ {
+vector<string> MemberDatabase::FindMatchingMembers(const AttValPair& input) const {
     string pair = attVal2Str(input.attribute, input.value);
     emailPair* matchingVec = emailsByAttrVal.search(pair);
     if (!matchingVec) return {};
     return matchingVec->v;
     
 }
-/*const*/ PersonProfile* MemberDatabase::GetMemberByEmail(string email) /*const*/ {
+const PersonProfile* MemberDatabase::GetMemberByEmail(string email) const {
     PersonProfile** target = profilesByEmail.search(email);
 //    return target;
     return !target ? nullptr : *target;

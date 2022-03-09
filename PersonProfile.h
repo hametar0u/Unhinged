@@ -27,7 +27,6 @@ private:
     RadixTree<string> t;
     unordered_set<string> s;
     vector<AttValPair> v;
-    //TODO: must use radixtree class to map attributes to values???
 };
 
 #endif /* PersonProfile_hpp */

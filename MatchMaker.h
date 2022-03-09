@@ -11,20 +11,14 @@ using namespace std;
 
 class MatchMaker {
 public:
-    MatchMaker(/*const*/ MemberDatabase& mdb, /*const*/ AttributeTranslator& at) : m_mdb(mdb), m_at(at) {}
-    ~MatchMaker() {} //TODO: dtor
+    MatchMaker(const MemberDatabase& mdb, const AttributeTranslator& at) : m_mdb(mdb), m_at(at) {}
+    ~MatchMaker() {}
     
-    vector<EmailCount> IdentifyRankedMatches(string email, int threshold) /*const*/;
+    vector<EmailCount> IdentifyRankedMatches(string email, int threshold) const;
     
 private:
-    void appendVector(vector<AttValPair>& a, const vector<AttValPair>& b) {
-        for (auto i : b) {
-            a.push_back(i);
-        } //TODO: remove if not needed
-    }
-    
-    /*const*/ MemberDatabase& m_mdb;
-    /*const*/ AttributeTranslator& m_at;
+    const MemberDatabase& m_mdb;
+    const AttributeTranslator& m_at;
 };
 
 #endif /* MatchMaker_hpp */

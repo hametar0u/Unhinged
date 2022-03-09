@@ -13,7 +13,7 @@ bool operator< (const EmailCount& a, const EmailCount& b) {
 }
 
 
-vector<EmailCount> MatchMaker::IdentifyRankedMatches(string email, int threshold) /*const*/ {
+vector<EmailCount> MatchMaker::IdentifyRankedMatches(string email, int threshold) const {
     
     unordered_set<string> compatibleAttrSet; //remove duplicate attvals
     unordered_map<string, int> emailCounts; //makes it easy to increment counts
@@ -21,7 +21,7 @@ vector<EmailCount> MatchMaker::IdentifyRankedMatches(string email, int threshold
     vector<EmailCount> matches;
 //    vector<AttValPair> compatibleAttr;
     
-    PersonProfile* member = m_mdb.GetMemberByEmail(email);
+    const PersonProfile* member = m_mdb.GetMemberByEmail(email);
     if (!member) return {};
     
     for (int i = 0; i < member->GetNumAttValPairs(); i++) {
