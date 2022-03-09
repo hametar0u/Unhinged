@@ -18,36 +18,29 @@ public:
     }
     
     ~RadixTree() {
-        killTree(root);
+        burnDownTree(root);
     }
     
-    //starting with just lowercase alphabets
     void insert(string key, const ValueType& value) {
         /*
-         first get the position to insert
-         then deal with the insert cases
-         
+         insert case examples:
          NO_COMMON_SUBSTR: cat -> winter
          TRAILING_KEY: ca -> cat
          TRAILING_LABEL: cat -> ca
          MID_SPLIT: cat -> cyan
          */
         
+        //get position to insert
         caseNum caseType;
         Node* target = findFirstNonMatching(root, caseType, key);
-        if (!target) return;
+        if (!target) return; //key in tree already
         
+        //deal with insert cases
         switch(caseType) {
             case NO_COMMON_SUBSTR: {
-                /*
-                 find ascii character of key[0] and insert the node
-                 */
                 int index = key[0];
-                Node* n = new Node;
-                n->label = key;
-                n->val = value;
-                n->end = true;
-                target->children[index] = n;
+                Node* n = new Node(key, value);
+                target->children[index] = n; //insert node into index of the ascii character of key[0]
                 return;
                 break; //extraneous but failsafe
             }
@@ -58,78 +51,52 @@ public:
                  */
                 string remainingKey = key.substr(target->label.size());
                 int index = remainingKey[0];
-                Node* n = new Node;
-                n->label = remainingKey;
-                n->val = value;
-                n->end = true;
+                Node* n = new Node(remainingKey, value);
                 target->children[index] = n;
                 return;
                 break;
             }
             case TRAILING_LABEL: {
-                /*
-                 take leftover words in label
-                 create new node that inherits everything in parent
-                 wipe parent's children (we don't wipe parent value because ValueType is templated)
-                 parent point to new node
-                 set parent value to passed in value
-                 change parent name to label
-                 make sure to keep the actual boolean true
-                 */
-                string remainingLabel = target->label.substr(key.size());
+                string remainingLabel = target->label.substr(key.size()); //take leftover chars in label
                 int index = remainingLabel[0];
                 
-                Node* n = new Node(*target); //cpy ctor
-                n->label = remainingLabel;
-                killChildren(target);
+                Node* n = new Node(*target, remainingLabel); //inherit everything in parent except the label
+                killChildren(target); //wipe parent's children (we don't wipe parent value because ValueType is templated)
                 target->children[index] = n;
                 
-                target->val = value;
-                target->label = key;
+                target->val = value; //set parent value to passed in value
+                target->label = key; //set parent label to key
+                //end is still true so no need to do anything
                 
                 return;
                 break;
             }
             case MID_SPLIT: {
-                /*
-                 find all of common letters
-                 take leftover words
-                 inherit everything in parent including boolean
-                 wipe
-                 parent point to new node
-                 insert new node with whatever is left in the key
-                 parent point to new node
-                 change parent label to common words
-                 */
-                string common;
+                string common; //find all common letters
                 int i = 0;
                 int j = 0;
                 while (target->label[i] != key[j]) {
                     j++;
                 }
                 key = key.substr(j); //splice off the beginning that may be used in parent nodes
-                
                 while (target->label[i] == key[i]) {
                     common += key[i];
                     i++;;
                 }
+                //get the leftover characters in label and key
                 string remainingLabel = target->label.substr(i);
                 string remainingKey = key.substr(i);
                 int index1 = remainingLabel[0];
                 int index2 = remainingKey[0];
                 
-                Node* n1 = new Node(*target);
-                n1->label = remainingLabel; //the cpy ctor inherits the original label so I need to overwrite it
+                Node* n1 = new Node(*target, remainingLabel); //inherit everything from parent
                 killChildren(target);
                 
-                Node* n2 = new Node;
-                n2->label = remainingKey;
-                n2->val = value;
-                n2->end = true;
+                Node* n2 = new Node(remainingKey, value); //new node with the passed in stuff
                 
                 target->children[index1] = n1;
                 target->children[index2] = n2;
-                target->label = common;
+                target->label = common; //change parent label to the common substring
                 target->end = false;
                 
                 return;
@@ -154,8 +121,8 @@ private:
             end = false;
         }
         
-        Node(const Node& src) {
-            label = src.label;
+        Node(const Node& src, const string key) { //cpy ctor except we modify the label
+            label = key;
             for (int i = 0; i < CHILDREN_SIZE; i++) {
                 children[i] = src.children[i];
             }
@@ -163,6 +130,14 @@ private:
             end = src.end;
         }
         
+        Node(const string key, const ValueType& value) {
+            label = key;
+            val = value;
+            for (int i = 0; i < CHILDREN_SIZE; i++) {
+                children[i] = nullptr;
+            }
+            end = true;
+        }
 
         string label;
         ValueType val;
@@ -256,10 +231,10 @@ private:
         }
     }
     
-    void killTree(Node* root) {
+    void burnDownTree(Node* root) {
         for (int i = 0; i < CHILDREN_SIZE; i++) {
             if (!root->children[i]) continue;
-            killTree(root->children[i]);
+            burnDownTree(root->children[i]);
         }
         
         delete root;
