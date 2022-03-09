@@ -19,7 +19,7 @@ bool MemberDatabase::LoadDatabase(string filename) {
         //getline succeeds if it gets at least one character (doesn't matter if there's no ,)
         if (!getline(file, email)) return false; //gets email
         PersonProfile* member = new PersonProfile(name, email);
-//        PersonProfile member(name, email);
+        profiles.push_back(member);
         
         if (!getline(file, num)) return false;
         numPairs = stoi(num);

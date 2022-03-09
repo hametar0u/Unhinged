@@ -35,7 +35,6 @@ vector<EmailCount> MatchMaker::IdentifyRankedMatches(string email, int threshold
         
     }
     for (auto attr : compatibleAttrSet) {
-        cerr << "compatible trait: " << attr << endl; //TODO: remove in prod
         AttValPair attval = str2AttVal(attr);
         vector<string> matchingMembers = m_mdb.FindMatchingMembers(attval);
         for (auto matchingMember : matchingMembers) {

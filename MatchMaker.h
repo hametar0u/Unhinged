@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <unordered_map>
 #include "provided.h"
 #include "MemberDatabase.h"
 #include "AttributeTranslator.h"
@@ -22,8 +23,8 @@ private:
         } //TODO: remove if not needed
     }
     
-    /*const*/ MemberDatabase m_mdb;
-    /*const*/ AttributeTranslator m_at;
+    /*const*/ MemberDatabase& m_mdb;
+    /*const*/ AttributeTranslator& m_at;
 };
 
 #endif /* MatchMaker_hpp */

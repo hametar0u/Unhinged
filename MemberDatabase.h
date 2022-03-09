@@ -11,7 +11,11 @@ using namespace std;
 class MemberDatabase {
 public:
     MemberDatabase() {}
-    ~MemberDatabase() {} //TODO: dtor; traverse through tree and delete the dynamically allocated person profiles
+    ~MemberDatabase() {
+        for (auto profile : profiles) {
+            delete profile;
+        }
+    }
     
     bool LoadDatabase(string filename);
     vector<string> FindMatchingMembers(/*const*/ AttValPair& input) /*const*/;
@@ -30,6 +34,7 @@ private:
     
     RadixTree<PersonProfile*> profilesByEmail;
     RadixTree<emailPair> emailsByAttrVal;
+    vector<PersonProfile*> profiles;
 };
 
 #endif /* MemberDatabase_hpp */
