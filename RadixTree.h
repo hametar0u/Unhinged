@@ -18,7 +18,7 @@ public:
     }
     
     ~RadixTree() {
-        burnDownTree(root);
+        deforestation(root);
     }
     
     void insert(string key, const ValueType& value) {
@@ -43,6 +43,8 @@ public:
         if (!target) return; //should've been checked by above but why not
         
         //deal with insert cases
+        if (keyToUse.size() != 0) key = keyToUse;
+        
         switch(caseType) {
             case NO_COMMON_SUBSTR: {
                 int index = key[0];
@@ -52,14 +54,16 @@ public:
                 break; //extraneous but failsafe
             }
             case TRAILING_KEY: {
-                int index = keyToUse[0]; //keyToUse saves the remaining bit of the key
-                Node* n = new Node(keyToUse, value);
+//                int index = keyToUse[0]; //keyToUse saves the remaining bit of the key
+                int index = key[0];
+                //Node* n = new Node(keyToUse, value);
+                Node* n = new Node(key, value);
                 target->children[index] = n;
                 return;
                 break;
             }
             case TRAILING_LABEL: {
-                if (keyToUse.size() != 0) key = keyToUse; //keyToUse stores the spliced key, and since its a trailing label you need to add the reamining bit of the label
+//                if (keyToUse.size() != 0) key = keyToUse; //keyToUse stores the spliced key, and since its a trailing label you need to add the reamining bit of the label
                 string remainingLabel = target->label.substr(key.size()); //take leftover chars in label
                 int index = remainingLabel[0];
                 
@@ -77,7 +81,7 @@ public:
             case MID_SPLIT: {
                 string common; //find all common letters
                 int i = 0;
-                if (keyToUse.size() != 0) key = keyToUse; //keyToUse only contains a value if it has to splice stuff off the front of the key because of navigating into deeper layers
+//                if (keyToUse.size() != 0) key = keyToUse; //keyToUse only contains a value if it has to splice stuff off the front of the key because of navigating into deeper layers
                 while (target->label.at(i) == key.at(i)) {
                     common += key.at(i);
                     i++;;
@@ -213,10 +217,10 @@ private:
         }
     }
     
-    void burnDownTree(Node* root) {
+    void deforestation(Node* root) {
         for (int i = 0; i < CHILDREN_SIZE; i++) {
             if (!root->children[i]) continue;
-            burnDownTree(root->children[i]);
+            deforestation(root->children[i]);
         }
         
         delete root;

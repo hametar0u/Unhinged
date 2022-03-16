@@ -15,11 +15,11 @@ using namespace std;
 const std::string MEMBERS_FILE    = "/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/members.txt";
 const std::string TRANSLATOR_FILE = "/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt";
 
-bool findMatches(/*const*/ MemberDatabase& mdb, /*const*/ AttributeTranslator& at);
+bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at);
 
 int main() {
 //    RadixTree<AttValPair> r;
-//    AttValPair a("hobby", "coding");
+    
 //    r.insert("hobby", a);
 //    a = AttValPair("hobby", "affairs");
 //    r.insert("hobby", a);
@@ -28,21 +28,45 @@ int main() {
 //    ent->value = "eating";
 //    ent = r.search("hobby");
 //    cerr << ent->attribute << "," << ent->value << endl;
-//
+    
+////    Person Profile TEST
+//    AttValPair a("hobby", "coding");
 //    PersonProfile p("David", "david@david.com");
 //    assert(p.GetNumAttValPairs() == 0);
 //    p.AddAttValPair(a);
 //    assert(p.GetNumAttValPairs() == 1);
 //    assert(p.GetAttVal(0, a) == true);
 //    cerr << a.attribute << "," << a.value << endl;
-    
+//
+//    //AT TEST
 //    AttributeTranslator at;
 //    at.Load("/Users/bigsad/Desktop/UCLA/CS/CS32/Unhinged/Unhinged/translator.txt");
-//    AttValPair a("hobby", "rock climbing");
-//    vector<AttValPair> v = at.FindCompatibleAttValPairs(a);
+//    AttValPair b("hobby", "rock climbing");
+//    vector<AttValPair> v = at.FindCompatibleAttValPairs(b);
 //    cout << v.size() << " compatible pairs" << endl;
+//    assert(v.size() == 13); //this value is obtained from using command+f on the translator file
+//
+//
+//    //MDB TEST
+//    MemberDatabase mdb;
+//    if (!mdb.LoadDatabase(MEMBERS_FILE))
+//    {
+//        std::cout << "Error loading " << MEMBERS_FILE << std::endl;
+//        return 1;
+//    }
+//
+//    AttValPair test("trait","uncritical");
+//    vector<string> vec = mdb.FindMatchingMembers(test);
+//    cout << "uncritical buffoons: " << vec.size() << endl;
+//    assert(vec.size() == 1377); //this value is obtained from using command+f on the members file
+//
+//    const PersonProfile* p1 = mdb.GetMemberByEmail("EmiliTy3@charter.net");
+//    assert(p1->GetNumAttValPairs() == 7);
+//    assert(p1->GetEmail() == "EmiliTy3@charter.net");
+//    assert(p1->GetName() == "Emilio Tyson");
     
     
+
     MemberDatabase mdb;
     if (!mdb.LoadDatabase(MEMBERS_FILE))
     {
@@ -62,7 +86,7 @@ int main() {
     std::cout << "Happy dating!" << std::endl;
 }
 
-bool findMatches(/*const*/ MemberDatabase& mdb, /*const*/ AttributeTranslator& at)
+bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)
 {
       // Prompt for email
     std::string email;
@@ -85,10 +109,6 @@ bool findMatches(/*const*/ MemberDatabase& mdb, /*const*/ AttributeTranslator& a
         pp->GetAttVal(k, av);
         std::cout << av.attribute << " --> " << av.value << std::endl;
     }
-    
-    AttValPair test("trait","uncritical");
-    vector<string> vec = mdb.FindMatchingMembers(test);
-    cout << "uncritical buffoons: " << vec.size() << endl;
 
       // Prompt user for threshold
     int threshold;

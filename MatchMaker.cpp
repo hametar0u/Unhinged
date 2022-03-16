@@ -35,6 +35,7 @@ vector<EmailCount> MatchMaker::IdentifyRankedMatches(string email, int threshold
         
     }
     for (auto attr : compatibleAttrSet) {
+        cerr << attr << endl;
         AttValPair attval = str2AttVal(attr);
         vector<string> matchingMembers = m_mdb.FindMatchingMembers(attval);
         for (auto matchingMember : matchingMembers) {
@@ -49,6 +50,7 @@ vector<EmailCount> MatchMaker::IdentifyRankedMatches(string email, int threshold
     }
     
     for (auto candidate : emailCounts) {
+        if (candidate.first == email) continue;
         if (candidate.second >= threshold) {
             EmailCount e(candidate.first, candidate.second);
             matches.push_back(e);
